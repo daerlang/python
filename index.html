@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshot Manager</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
+        socket.on('screenshot', function(data) {
+            var img = document.createElement('img');
+            img.src = 'data:image/png;base64,' + data.image;
+            document.body.appendChild(img);
+        });
+    </script>
+</head>
+<body>
+    <!-- 可以添加一些欢迎信息或登录状态的提示 -->
+    <h1>Welcome, {{ session['username'] }}!</h1>
+    <p>You are now viewing the client's screenshot.</p>
+</body>
+</html>
